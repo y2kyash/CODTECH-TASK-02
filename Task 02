@@ -1,0 +1,59 @@
+/* VULNERABILITY SCANNER TOOL*/
+
+import requests 
+import re
+import tkinter as tk
+from tkinter import messagebox
+
+def var_vulnerability_scan(url):
+    """Verify if directory listing is enabled."""
+    try:
+        response = requests.get(url, timeout=5)
+        if response.status_code == 200:
+            if re.search(r"<title>Index of", response.text, re.IGNORECASE): 
+             return True
+        else:
+            return False
+    except requests.RequestException:
+        return False
+    
+def scan_url():
+    """Handling the scan button press."""
+    url = url_entry.get().strip()
+
+    if not url:
+        messagebox.showwarning("Input Error", "Please enter a valid URL.")
+        return
+    
+    if var_vulnerability_scan(url):
+        result_label.config(text=f"Directory listing is enabled on {url}", fg="green")
+    else:
+        result_label.config(text=f"Directory listing is not enabled on {url}", fg="red")
+
+# creating the application window
+
+app = tk.Tk()
+app.title("Vulnerability Scanner Tool")
+app.geometry("600x400")
+
+# Input label and entry
+
+url_label = tk.Label(app, text="Enter the URL: ", font=("Arial", 12))
+url_label.pack(pady=5)
+
+url_entry = tk.Entry(app, width=50)  
+url_entry.pack()
+
+# Scan button 
+
+scan_button = tk.Button(app, text="Scan", command=scan_url,  fg="blue")
+scan_button.pack(pady=10)
+
+# Result Label
+
+result_label = tk.Label(app, text="", font=("Arial", 12))
+result_label.pack(pady=5)
+
+# Run the application
+
+app.mainloop()
