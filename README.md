@@ -111,4 +111,6 @@ The primary objective of this project is to **enhance web application security**
 6. **Cross-Platform Compatibility**:
    - Package the application for seamless use on Windows, macOS, and Linux.
 
-By simplifying the detection of directory listing vulnerabilities and educating users on its risks, this tool aligns with its objective of making web security accessible, effective, and actionable for all.
+### **Glimpes of project**
+
+![image](https://github.com/user-attachments/assets/472bdcbb-03f2-42d8-94ba-6087cc022416)
